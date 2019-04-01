@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Vehicle.Models.Modeli>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Index", "Modelis", FormMethod.Get))   // u kombinaciji sa gore: @using (Html.BeginForm("Index", "Modelis", FormMethod.Get))
+{<p> Find by makes of or by model: @Html.TextBox("SearchString") <input type="submit" value="Search" /></p>}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Makes of", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+
+        <th>
+            @Html.ActionLink("Model", "Index", new { sortOrder = ViewBag.ModelSortParm })
+        </th>
+        <th>
+            Abvr
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Abvr)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("Makes List", "Index", "Makes")
+
